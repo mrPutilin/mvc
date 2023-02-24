@@ -4,8 +4,7 @@ import org.example.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.example.model.Post;
 import org.example.repository.PostRepository;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 
 @Service
 public class PostService {
@@ -15,19 +14,22 @@ public class PostService {
         this.repository = repository;
     }
 
-    public ConcurrentHashMap<Long, Post> all() {
+    public Map<Long, Post> all() {
         return repository.all();
     }
 
-    public Optional<Post> getById(long id) {
-        return Optional.ofNullable(repository.getById(id)).orElseThrow(NotFoundException::new);
+
+    public Post getById(long id){
+        return repository.getById(id).orElseThrow(NotFoundException::new);
     }
 
     public Post save(Post post) {
         return repository.save(post);
     }
 
-    public void removeById(long id) {
+
+    public void removeById ( long id) {
         repository.removeById(id);
     }
+
 }
